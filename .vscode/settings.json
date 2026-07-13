@@ -1,0 +1,15 @@
+{
+  "markdown-mermaid.lightModeTheme": "vscode",
+  "markdown-mermaid.darkModeTheme": "vscode",
+  "markdown-mermaid.languages": [
+    "mermaid"
+  ],
+  "markdown-mermaid.maxTextSize": 200000,
+  "markdown-mermaid.maxHeight": "",
+  "markdown-mermaid.resizable": false,
+  "markdown-mermaid.controls.show": "never",
+  "markdown-mermaid.mouseNavigation.enabled": "never",
+  "markdown.styles": [
+    ".vscode/markdown-preview.css"
+  ]
+}

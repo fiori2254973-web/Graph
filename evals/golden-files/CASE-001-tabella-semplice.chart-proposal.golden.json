@@ -1,0 +1,98 @@
+{
+  "caseId": "CASE-001",
+  "caseName": "Tabella semplice",
+  "specs": [
+    "specs/001-prototipo-end-to-end.md",
+    "specs/004-normalizzazione-dati.md",
+    "specs/005-proposta-grafico.md",
+    "specs/006-correzione-manuale-preview.md"
+  ],
+  "ledger": [
+    "LEDGER-001"
+  ],
+  "input": {
+    "description": "Una riga intestazione, una colonna categoria, una colonna numerica.",
+    "sheetName": "Vendite",
+    "rawRows": [
+      ["Mese", "Vendite"],
+      ["Gennaio", 120],
+      ["Febbraio", 150],
+      ["Marzo", 90]
+    ]
+  },
+  "expected": {
+    "tableDetection": {
+      "selectedRange": "A1:B4",
+      "headerRowIndex": 0,
+      "confidence": 0.95,
+      "assumptions": [
+        {
+          "code": "ASSUME_FIRST_ROW_HEADER",
+          "message": "La prima riga contiene etichette testuali compatibili con intestazioni."
+        }
+      ],
+      "warnings": []
+    },
+    "normalizedTable": {
+      "columns": [
+        {
+          "name": "Mese",
+          "roleCandidate": "category",
+          "type": "text"
+        },
+        {
+          "name": "Vendite",
+          "roleCandidate": "value",
+          "type": "number"
+        }
+      ],
+      "rows": [
+        {
+          "Mese": "Gennaio",
+          "Vendite": 120
+        },
+        {
+          "Mese": "Febbraio",
+          "Vendite": 150
+        },
+        {
+          "Mese": "Marzo",
+          "Vendite": 90
+        }
+      ],
+      "warnings": []
+    },
+    "chartProposal": {
+      "chartType": "bar",
+      "categoryAxis": "Mese",
+      "series": [
+        {
+          "name": "Vendite",
+          "valueColumn": "Vendite"
+        }
+      ],
+      "title": "Vendite per Mese",
+      "confidence": 0.9,
+      "rationale": [
+        "Una colonna testuale e' adatta come asse categorie.",
+        "Una colonna numerica e' adatta come serie valori.",
+        "Un grafico a barre e' una proposta conservativa per categorie testuali discrete."
+      ],
+      "warnings": [],
+      "requiresUserConfirmation": false
+    },
+    "previewDecision": {
+      "canRender": true,
+      "blockingErrors": [],
+      "visibleAssumptions": [
+        "La prima riga e' stata interpretata come intestazione."
+      ],
+      "editableFields": [
+        "chartType",
+        "categoryAxis",
+        "series",
+        "title"
+      ]
+    }
+  }
+}

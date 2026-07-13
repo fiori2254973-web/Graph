@@ -1,0 +1,89 @@
+/* Keep Mermaid diagrams visible after VS Code markdown preview scripts render them. */
+.markdown-body .mermaid,
+.vscode-body .mermaid,
+.markdown-preview-view .mermaid,
+pre.mermaid {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 220px;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  color: var(--vscode-editor-foreground) !important;
+  background: var(--vscode-editor-background) !important;
+  border: 1px solid var(--vscode-panel-border, transparent);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.markdown-body .mermaid svg,
+.vscode-body .mermaid svg,
+.markdown-preview-view .mermaid svg {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  max-width: 100%;
+  height: auto !important;
+  min-height: 180px;
+  overflow: visible !important;
+}
+
+.markdown-body .mermaid svg text,
+.markdown-body .mermaid svg tspan,
+.vscode-body .mermaid svg text,
+.vscode-body .mermaid svg tspan,
+.markdown-preview-view .mermaid svg text,
+.markdown-preview-view .mermaid svg tspan {
+  fill: var(--vscode-editor-foreground) !important;
+  color: var(--vscode-editor-foreground) !important;
+}
+
+.markdown-body .mermaid svg .nodeLabel,
+.markdown-body .mermaid svg .edgeLabel,
+.markdown-body .mermaid svg .label,
+.vscode-body .mermaid svg .nodeLabel,
+.vscode-body .mermaid svg .edgeLabel,
+.vscode-body .mermaid svg .label,
+.markdown-preview-view .mermaid svg .nodeLabel,
+.markdown-preview-view .mermaid svg .edgeLabel,
+.markdown-preview-view .mermaid svg .label {
+  color: var(--vscode-editor-foreground) !important;
+}
+
+.markdown-body .mermaid svg .mindmap-node,
+.markdown-body .mermaid svg .node rect,
+.markdown-body .mermaid svg .node circle,
+.markdown-body .mermaid svg .node ellipse,
+.markdown-body .mermaid svg .node polygon,
+.vscode-body .mermaid svg .mindmap-node,
+.vscode-body .mermaid svg .node rect,
+.vscode-body .mermaid svg .node circle,
+.vscode-body .mermaid svg .node ellipse,
+.vscode-body .mermaid svg .node polygon,
+.markdown-preview-view .mermaid svg .mindmap-node,
+.markdown-preview-view .mermaid svg .node rect,
+.markdown-preview-view .mermaid svg .node circle,
+.markdown-preview-view .mermaid svg .node ellipse,
+.markdown-preview-view .mermaid svg .node polygon {
+  fill: var(--vscode-editorWidget-background, var(--vscode-editor-background)) !important;
+  stroke: var(--vscode-editor-foreground) !important;
+}
+
+.markdown-body .mermaid svg .edgePath path,
+.markdown-body .mermaid svg .mindmap-edge,
+.vscode-body .mermaid svg .edgePath path,
+.vscode-body .mermaid svg .mindmap-edge,
+.markdown-preview-view .mermaid svg .edgePath path,
+.markdown-preview-view .mermaid svg .mindmap-edge {
+  stroke: var(--vscode-editor-foreground) !important;
+}
+
+.markdown-body .mermaid:empty,
+.vscode-body .mermaid:empty,
+.markdown-preview-view .mermaid:empty {
+  display: block !important;
+  visibility: visible !important;
+  min-height: 220px !important;
+  border: 1px dashed var(--vscode-panel-border, var(--vscode-editor-foreground));
+}
