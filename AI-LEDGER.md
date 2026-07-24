@@ -321,8 +321,8 @@ Una voce e' utile solo se contiene:
 - Causa probabile: confusione tra elasticita' del prodotto e assenza di vincoli verificabili.
 - Escape point: aggiornare il dominio del progetto senza riscrivere costituzione, specifica operativa, ADR, task e registri.
 - Regola aggiornata: ogni feature del nuovo Graph ODE deve documentare perimetri, parametri/configurazioni, celle sorgente, confidenza e criteri di stop; l'output finale deve essere rigido anche se l'input e' elastico.
-- Verifica anti-ricorrenza: `specs/000-costituzione-del-progetto.md` e `specs/007-excel-equazioni-differenziali-python.md` descrivono perimetri, configurazioni, pipeline, diagrammi Mermaid, stop condition e ruolo subordinato di `phi4-mini`.
-- File collegati: `specs/000-costituzione-del-progetto.md`, `specs/007-excel-equazioni-differenziali-python.md`, `README.md`, `adr/ADR-003-python-sympy-ollama-phi4-mini.md`, `tasks/TASK-004-rifondazione-graph-ode-excel.md`
+- Verifica anti-ricorrenza: `specs/000-costituzione-del-progetto.md` e `specs/007-excel-equazioni-differenziali-python.md` descrivono perimetri, configurazioni, pipeline, diagrammi Mermaid, stop condition e ruolo subordinato di `phi4-mini`; `SDD_APP` implementa `CellRef`, `CandidateBlock`, `OdeInterpretation`, report JSON/Markdown e stop diagnostici.
+- File collegati: `specs/000-costituzione-del-progetto.md`, `specs/007-excel-equazioni-differenziali-python.md`, `README.md`, `adr/ADR-003-python-sympy-ollama-phi4-mini.md`, `tasks/TASK-004-rifondazione-graph-ode-excel.md`, `SDD_APP/graph_ode`
 - Owner: progetto Graph
 - Note: formula guida: massima elasticita' in ingresso, massima rigidita' in uscita.
 
@@ -339,6 +339,34 @@ Una voce e' utile solo se contiene:
 - File collegati: `specs/007-excel-equazioni-differenziali-python.md`, `specs/000-costituzione-del-progetto.md`, `tasks/TASK-004-rifondazione-graph-ode-excel.md`
 - Owner: progetto Graph
 - Note: una specifica elastica senza criteri di rifiuto e' una promessa, non una specifica.
+
+### LEDGER-022 - I run Excel devono produrre artefatti ricostruibili
+
+- Data: 2026-07-24
+- Stato: prevenuto
+- Area: SDD_APP, parsing Excel, report, rilascio
+- Sintomo osservabile: un run dichiara una soluzione ma non permette di ricostruire quali celle, euristiche, interpretazioni e configurazioni hanno portato al risultato.
+- Causa probabile: implementazione orientata solo al risultato finale invece che al contratto di output della SDD.
+- Escape point: testare solo la soluzione SymPy senza controllare gli artefatti `workbook_scan.json`, `candidate_blocks.json`, `interpretations.json`, `selected_interpretation.json`, `solve_result.json`, `run_report.json` e `report.md`.
+- Regola aggiornata: ogni run del parser Excel deve scrivere gli artefatti obbligatori prima di essere considerato accettabile; se il grafico e' richiesto e sicuro deve produrre anche `plot.png`, altrimenti deve dichiarare il warning/stop del grafico.
+- Verifica anti-ricorrenza: `SDD_APP/tests/test_cli_integration.py` crea un workbook `.xlsx`, esegue la CLI e verifica la presenza degli artefatti obbligatori e della soluzione verificata.
+- File collegati: `SDD_APP/graph_ode/cli.py`, `SDD_APP/graph_ode/reporting.py`, `SDD_APP/tests/test_cli_integration.py`, `tasks/TASK-004-rifondazione-graph-ode-excel.md`
+- Owner: progetto Graph
+- Note: l'output finale deve essere rigido anche quando l'input Excel resta elastico.
+
+### LEDGER-023 - Le spiegazioni LLM salvate nei report non devono contenere mojibake comune
+
+- Data: 2026-07-24
+- Stato: prevenuto
+- Area: SDD_APP, Ollama, phi4-mini, report Markdown
+- Sintomo osservabile: il report salva caratteri come `Ã¨` o `Â` al posto di lettere accentate, rendendo la spiegazione LLM poco professionale e potenzialmente ambigua.
+- Causa probabile: risposta o passaggio locale con testo UTF-8 interpretato come Latin-1/Windows code page in un punto della catena.
+- Escape point: salvare direttamente la risposta LLM senza filtro conservativo sui pattern di mojibake piu' comuni.
+- Regola aggiornata: prima della verifica anti-contraddizione e del salvataggio, la risposta LLM deve passare da un filtro conservativo che tenta la riparazione Latin-1 -> UTF-8 solo quando compaiono marker `Ã` o `Â`.
+- Verifica anti-ricorrenza: `SDD_APP/tests/test_llm_guard.py` copre `repair_common_mojibake`; `SDD_APP/graph_ode/llm.py` applica il filtro in `explain_with_phi4_mini`.
+- File collegati: `SDD_APP/graph_ode/llm.py`, `SDD_APP/tests/test_llm_guard.py`
+- Owner: progetto Graph
+- Note: se la riparazione non e' applicabile o peggiora il testo, il contenuto originale viene mantenuto.
 
 ## Checklist di chiusura anti-recidiva
 

@@ -1,0 +1,19 @@
+{
+  "status": "solved",
+  "normalized_equation": "Derivative(y(x), (x, 2)) + y(x) = 0",
+  "solution": "Eq(y(x), sin(x))",
+  "verification": "(True, 0)",
+  "hints": [
+    "nth_linear_constant_coeff_homogeneous",
+    "2nd_power_series_ordinary",
+    "2nd_nonlinear_autonomous_conserved",
+    "2nd_nonlinear_autonomous_conserved_Integral"
+  ],
+  "plot": "SDD_APP\\outputs\\second_order\\plot.png",
+  "llm_explanation": null,
+  "warnings": [
+    "Spiegazione Ollama disabilitata con --no-ollama."
+  ],
+  "stop_reason": null,
+  "error": null
+}

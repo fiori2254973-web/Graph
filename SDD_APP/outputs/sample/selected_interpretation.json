@@ -1,0 +1,37 @@
+{
+  "id": "I001",
+  "status": "selected",
+  "confidence_score": 100,
+  "equation_block": "B002",
+  "parameter_blocks": [
+    "B004"
+  ],
+  "initial_condition_blocks": [
+    "B006"
+  ],
+  "plot_blocks": [],
+  "normalized_equation": "Derivative(y(x), x) = a*y(x)",
+  "parameters": {
+    "a": "2"
+  },
+  "initial_conditions": [
+    "y(0)=1"
+  ],
+  "source_cells": [
+    {
+      "sheet": "Caso ODE",
+      "address": "B1"
+    },
+    {
+      "sheet": "Caso ODE",
+      "address": "B2"
+    },
+    {
+      "sheet": "Caso ODE",
+      "address": "B3"
+    }
+  ],
+  "decision_required": false,
+  "rejection_reason": "",
+  "warnings": []
+}

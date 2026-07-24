@@ -1,7 +1,7 @@
 # TASK-004 - Rifondazione Graph per Excel elastici e ODE
 
 - Data: 2026-07-24
-- Stato: aperto
+- Stato: chiuso
 - Specifica collegata: `specs/007-excel-equazioni-differenziali-python.md`
 - ADR collegata: `adr/ADR-003-python-sympy-ollama-phi4-mini.md`
 - Ledger collegato: `AI-LEDGER.md`
@@ -27,6 +27,8 @@ Riallineare il progetto Graph al nuovo scopo: software Python che legge Excel el
 12. Implementare mapping candidati con confidenza.
 13. Integrare il solver esistente con input da mapping Excel.
 14. Generare report tracciabile.
+15. Implementare rilascio eseguibile in `SDD_APP`.
+16. Verificare CLI, artefatti obbligatori e casi base.
 
 ## Criteri di accettazione
 
@@ -62,9 +64,39 @@ Verifiche documentali:
 - lettura manuale di `specs/007-excel-equazioni-differenziali-python.md`;
 - controllo `git diff --check`.
 
+## Esito rilascio
+
+- Data rilascio locale: 2026-07-24
+- Cartella eseguibile: `SDD_APP`
+- Entrypoint: `SDD_APP/run_graph_ode.py`
+- Pacchetto: `SDD_APP/graph_ode`
+- Documentazione: `SDD_APP/README.md`
+- Test: `SDD_APP/tests`
+- Corpus iniziale: `SDD_APP/examples/reference_cases.xlsx`, generato da `SDD_APP/examples/create_reference_workbooks.py`
+
+Verifiche eseguite:
+
+```powershell
+python -m py_compile <tutti i file .py in SDD_APP>
+python -m unittest discover -s SDD_APP\tests
+python SDD_APP\examples\create_sample_workbook.py
+python SDD_APP\examples\create_reference_workbooks.py
+python SDD_APP\run_graph_ode.py --input SDD_APP\examples\sample_ode.xlsx --sheet "Caso ODE" --output SDD_APP\outputs\sample --no-ollama --no-pause
+python SDD_APP\run_graph_ode.py --input SDD_APP\examples\sample_ode.xlsx --sheet "Secondo ordine" --output SDD_APP\outputs\second_order --no-ollama --no-pause
+```
+
+Artefatti prodotti e verificati nel caso base:
+
+- `workbook_scan.json`
+- `candidate_blocks.json`
+- `interpretations.json`
+- `selected_interpretation.json`
+- `solve_result.json`
+- `run_report.json`
+- `report.md`
+- `plot.png`
+
 ## Dipendenze future
 
-- scelta libreria Excel;
-- definizione corpus;
-- scelta formato report;
-- definizione UX di conferma utente.
+- raffinare UX di conferma utente oltre ai flag CLI;
+- valutare supporto `.xls` legacy se resta requisito reale.

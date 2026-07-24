@@ -72,8 +72,8 @@ Registrare rischi, probabilita', impatto, mitigazioni e segnali di intervento um
 - Rilevabilita': media
 - Mitigazione: celle sorgente obbligatorie, confidenza, alternative candidate, preview, stop su interpretazioni incompatibili.
 - Segnale HITL: parametri duplicati, celle lontane, etichette ambigue, piu' interpretazioni sopra soglia media.
-- Stato: aperto
-- Collegamenti: `specs/007-excel-equazioni-differenziali-python.md`, `AI-LEDGER.md`
+- Stato: contenuto dal rilascio locale `SDD_APP`, che produce celle sorgente, confidenza, interpretazioni e stop reason.
+- Collegamenti: `specs/007-excel-equazioni-differenziali-python.md`, `AI-LEDGER.md`, `SDD_APP/graph_ode/detector.py`, `SDD_APP/graph_ode/reporting.py`
 
 ### RISK-005 - Spiegazione LLM contraddittoria rispetto a SymPy
 
@@ -86,7 +86,7 @@ Registrare rischi, probabilita', impatto, mitigazioni e segnali di intervento um
 - Mitigazione: ruolo LLM `explain_only`, prompt vincolante, soppressione di risposte contraddittorie, fallback deterministico.
 - Segnale HITL: marker testuali come `non corretta`, `non soddisfa`, `errore nella soluzione` in presenza di verifica `(True, 0)`.
 - Stato: contenuto
-- Collegamenti: `AI-LEDGER.md`, `scripts/ode_phi4_solver.py`, `scripts/ode_phi4_mini_solver.py`
+- Collegamenti: `AI-LEDGER.md`, `scripts/ode_phi4_solver.py`, `scripts/ode_phi4_mini_solver.py`, `SDD_APP/graph_ode/llm.py`, `SDD_APP/tests/test_llm_guard.py`
 
 ### RISK-006 - Elasticita' percepita come assenza di perimetro
 
@@ -98,5 +98,5 @@ Registrare rischi, probabilita', impatto, mitigazioni e segnali di intervento um
 - Rilevabilita': media
 - Mitigazione: perimetri espliciti, configurazioni documentate, stop condition, black hat obbligatorio per ogni euristica.
 - Segnale HITL: richiesta di calcolo automatico su foglio con piu' interpretazioni plausibili.
-- Stato: aperto
-- Collegamenti: `specs/000-costituzione-del-progetto.md`, `specs/007-excel-equazioni-differenziali-python.md`
+- Stato: contenuto per la CLI `SDD_APP`; resta aperto per future interfacce utente non CLI.
+- Collegamenti: `specs/000-costituzione-del-progetto.md`, `specs/007-excel-equazioni-differenziali-python.md`, `SDD_APP/README.md`

@@ -1,0 +1,112 @@
+[
+  {
+    "id": "B002",
+    "kind": "equation",
+    "raw_value": "y'' + y = 0",
+    "normalized_value": "Derivative(y(x), (x, 2)) + y(x) = 0",
+    "confidence_score": 80,
+    "confidence_label": "alta",
+    "source_cells": [
+      {
+        "sheet": "Secondo ordine",
+        "address": "B1",
+        "row": 1,
+        "column": 2,
+        "raw_value": "y'' + y = 0",
+        "display_value": "y'' + y = 0",
+        "formula": null,
+        "data_type": "s",
+        "is_merged": false,
+        "is_hidden": false
+      }
+    ],
+    "evidence": [
+      {
+        "feature": "derivata esplicita",
+        "weight": 40,
+        "note": "contiene y' o Derivative"
+      },
+      {
+        "feature": "uguaglianza matematica",
+        "weight": 15,
+        "note": "contiene = e simboli di funzione"
+      },
+      {
+        "feature": "etichetta vicina equazione",
+        "weight": 25,
+        "note": "label vicina coerente"
+      }
+    ],
+    "warnings": []
+  },
+  {
+    "id": "B004",
+    "kind": "initial_condition",
+    "raw_value": "y(0)=0",
+    "normalized_value": "y(0)=0",
+    "confidence_score": 65,
+    "confidence_label": "media",
+    "source_cells": [
+      {
+        "sheet": "Secondo ordine",
+        "address": "B2",
+        "row": 2,
+        "column": 2,
+        "raw_value": "y(0)=0",
+        "display_value": "y(0)=0",
+        "formula": null,
+        "data_type": "s",
+        "is_merged": false,
+        "is_hidden": false
+      }
+    ],
+    "evidence": [
+      {
+        "feature": "pattern y(x0)=value",
+        "weight": 45,
+        "note": "condizione iniziale esplicita"
+      },
+      {
+        "feature": "etichetta vicina condizione",
+        "weight": 20,
+        "note": "label vicina coerente"
+      }
+    ],
+    "warnings": []
+  },
+  {
+    "id": "B005",
+    "kind": "initial_condition",
+    "raw_value": "y'(0)=1",
+    "normalized_value": "y'(0)=1",
+    "confidence_score": 65,
+    "confidence_label": "media",
+    "source_cells": [
+      {
+        "sheet": "Secondo ordine",
+        "address": "B3",
+        "row": 3,
+        "column": 2,
+        "raw_value": "y'(0)=1",
+        "display_value": "y'(0)=1",
+        "formula": null,
+        "data_type": "s",
+        "is_merged": false,
+        "is_hidden": false
+      }
+    ],
+    "evidence": [
+      {
+        "feature": "pattern y(x0)=value",
+        "weight": 45,
+        "note": "condizione iniziale esplicita"
+      },
+      {
+        "feature": "etichetta vicina condizione",
+        "weight": 20,
+        "note": "label vicina coerente"
+      }
+    ],
+    "warnings": []
+  }
+]

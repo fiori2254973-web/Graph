@@ -1,0 +1,246 @@
+{
+  "run_id": "20260724_121325",
+  "input": {
+    "path": "SDD_APP\\examples\\sample_ode.xlsx",
+    "sheets_scanned": [
+      "Caso ODE"
+    ],
+    "limits": {
+      "scan_max_sheets": 20,
+      "scan_max_cells": 20000,
+      "cell_neighborhood_radius": 2,
+      "candidate_min_confidence": 50,
+      "auto_solve_confidence": 80,
+      "allow_hidden_sheets": false,
+      "allow_formula_cells": true,
+      "model_name": "phi4-mini",
+      "ollama_host": "http://localhost:11434",
+      "ollama_timeout": 60,
+      "plot_enabled": false,
+      "plot_x_min": 0.0,
+      "plot_x_max": 10.0,
+      "plot_points": 100,
+      "show_plot": false,
+      "pause_at_end": false
+    }
+  },
+  "configuration": {
+    "scan_max_sheets": 20,
+    "scan_max_cells": 20000,
+    "cell_neighborhood_radius": 2,
+    "candidate_min_confidence": 50,
+    "auto_solve_confidence": 80,
+    "allow_hidden_sheets": false,
+    "allow_formula_cells": true,
+    "model_name": "phi4-mini",
+    "ollama_host": "http://localhost:11434",
+    "ollama_timeout": 60,
+    "plot_enabled": false,
+    "plot_x_min": 0.0,
+    "plot_x_max": 10.0,
+    "plot_points": 100,
+    "show_plot": false,
+    "pause_at_end": false
+  },
+  "candidate_blocks": [
+    {
+      "id": "B002",
+      "kind": "equation",
+      "raw_value": "y' = a*y",
+      "normalized_value": "Derivative(y(x), x) = a*y(x)",
+      "confidence_score": 90,
+      "confidence_label": "alta",
+      "source_cells": [
+        {
+          "sheet": "Caso ODE",
+          "address": "B1",
+          "row": 1,
+          "column": 2,
+          "raw_value": "y' = a*y",
+          "display_value": "y' = a*y",
+          "formula": null,
+          "data_type": "s",
+          "is_merged": false,
+          "is_hidden": false
+        }
+      ],
+      "evidence": [
+        {
+          "feature": "derivata esplicita",
+          "weight": 40,
+          "note": "contiene y' o Derivative"
+        },
+        {
+          "feature": "uguaglianza matematica",
+          "weight": 15,
+          "note": "contiene = e simboli di funzione"
+        },
+        {
+          "feature": "etichetta vicina equazione",
+          "weight": 25,
+          "note": "label vicina coerente"
+        },
+        {
+          "feature": "nome foglio coerente",
+          "weight": 10,
+          "note": "foglio orientato al problema"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "B004",
+      "kind": "parameter",
+      "raw_value": "a=2",
+      "normalized_value": "a=2",
+      "confidence_score": 65,
+      "confidence_label": "media",
+      "source_cells": [
+        {
+          "sheet": "Caso ODE",
+          "address": "B2",
+          "row": 2,
+          "column": 2,
+          "raw_value": "a=2",
+          "display_value": "a=2",
+          "formula": null,
+          "data_type": "s",
+          "is_merged": false,
+          "is_hidden": false
+        }
+      ],
+      "evidence": [
+        {
+          "feature": "pattern nome=valore",
+          "weight": 35,
+          "note": "parametro scalare candidato"
+        },
+        {
+          "feature": "etichetta vicina parametro",
+          "weight": 20,
+          "note": "label vicina coerente"
+        },
+        {
+          "feature": "nome foglio coerente",
+          "weight": 10,
+          "note": "foglio orientato al problema"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "B006",
+      "kind": "initial_condition",
+      "raw_value": "y(0)=1",
+      "normalized_value": "y(0)=1",
+      "confidence_score": 75,
+      "confidence_label": "media",
+      "source_cells": [
+        {
+          "sheet": "Caso ODE",
+          "address": "B3",
+          "row": 3,
+          "column": 2,
+          "raw_value": "y(0)=1",
+          "display_value": "y(0)=1",
+          "formula": null,
+          "data_type": "s",
+          "is_merged": false,
+          "is_hidden": false
+        }
+      ],
+      "evidence": [
+        {
+          "feature": "pattern y(x0)=value",
+          "weight": 45,
+          "note": "condizione iniziale esplicita"
+        },
+        {
+          "feature": "etichetta vicina condizione",
+          "weight": 20,
+          "note": "label vicina coerente"
+        },
+        {
+          "feature": "nome foglio coerente",
+          "weight": 10,
+          "note": "foglio orientato al problema"
+        }
+      ],
+      "warnings": []
+    }
+  ],
+  "interpretations": [
+    {
+      "id": "I001",
+      "status": "selected",
+      "confidence_score": 100,
+      "equation_block": "B002",
+      "parameter_blocks": [
+        "B004"
+      ],
+      "initial_condition_blocks": [
+        "B006"
+      ],
+      "plot_blocks": [],
+      "normalized_equation": "Derivative(y(x), x) = a*y(x)",
+      "parameters": {
+        "a": "2"
+      },
+      "initial_conditions": [
+        "y(0)=1"
+      ],
+      "source_cells": [
+        {
+          "sheet": "Caso ODE",
+          "address": "B1"
+        },
+        {
+          "sheet": "Caso ODE",
+          "address": "B2"
+        },
+        {
+          "sheet": "Caso ODE",
+          "address": "B3"
+        }
+      ],
+      "decision_required": false,
+      "rejection_reason": "",
+      "warnings": []
+    }
+  ],
+  "selected_interpretation": "I001",
+  "solve_result": {
+    "status": "solved",
+    "normalized_equation": "Derivative(y(x), x) = a*y(x)",
+    "solution": "Eq(y(x), exp(2*x))",
+    "verification": "(True, 0)",
+    "hints": [
+      "separable",
+      "1st_exact",
+      "1st_linear",
+      "Bernoulli",
+      "almost_linear",
+      "1st_power_series",
+      "lie_group",
+      "nth_linear_constant_coeff_homogeneous",
+      "separable_Integral",
+      "1st_exact_Integral",
+      "1st_linear_Integral",
+      "Bernoulli_Integral",
+      "almost_linear_Integral"
+    ],
+    "plot": null,
+    "llm_explanation": null,
+    "warnings": [
+      "Spiegazione Ollama non generata: TimeoutError: timed out"
+    ],
+    "stop_reason": null,
+    "error": null
+  },
+  "diagnostics": {
+    "warnings": [
+      "Spiegazione Ollama non generata: TimeoutError: timed out"
+    ],
+    "stop_reason": null
+  }
+}

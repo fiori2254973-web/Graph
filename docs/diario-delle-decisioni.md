@@ -49,3 +49,13 @@ Registrare decisioni importanti, motivazione, alternative scartate e impatto att
 - Impatto atteso: nuova SDD, nuova ADR, nuovi task, riallineamento delle specifiche precedenti e implementazione Python-first.
 - Collegamenti: `specs/000-costituzione-del-progetto.md`, `specs/007-excel-equazioni-differenziali-python.md`, `adr/ADR-003-python-sympy-ollama-phi4-mini.md`, `tasks/TASK-004-rifondazione-graph-ode-excel.md`
 - Owner: progetto Graph
+
+### DEC-004 - Primo rilascio eseguibile in SDD_APP
+
+- Data: 2026-07-24
+- Decisione: il codice eseguibile derivato dalla SDD viene rilasciato nella cartella `SDD_APP`, con entrypoint `run_graph_ode.py`, pacchetto `graph_ode`, test locali e README di utilizzo.
+- Motivazione: l'utente ha richiesto un risultato operativo fino al rilascio finale nella cartella `SDD_APP`; il rilascio deve restare tracciabile rispetto ai gate della SPEC-007.
+- Alternative scartate: estendere solo gli script precedenti in `scripts/`; produrre solo documentazione; usare `phi4-mini` come risolutore matematico primario.
+- Impatto atteso: Graph dispone di una pipeline locale verificabile per Excel elastici, con artefatti JSON/Markdown, solving SymPy, grafico sicuro e spiegazione Ollama opzionale.
+- Collegamenti: `SDD_APP/README.md`, `SDD_APP/run_graph_ode.py`, `SDD_APP/graph_ode`, `SDD_APP/tests`, `tasks/TASK-004-rifondazione-graph-ode-excel.md`
+- Owner: progetto Graph

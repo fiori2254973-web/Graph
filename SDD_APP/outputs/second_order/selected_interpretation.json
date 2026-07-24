@@ -1,0 +1,35 @@
+{
+  "id": "I001",
+  "status": "selected",
+  "confidence_score": 90,
+  "equation_block": "B002",
+  "parameter_blocks": [],
+  "initial_condition_blocks": [
+    "B004",
+    "B005"
+  ],
+  "plot_blocks": [],
+  "normalized_equation": "Derivative(y(x), (x, 2)) + y(x) = 0",
+  "parameters": {},
+  "initial_conditions": [
+    "y(0)=0",
+    "y'(0)=1"
+  ],
+  "source_cells": [
+    {
+      "sheet": "Secondo ordine",
+      "address": "B1"
+    },
+    {
+      "sheet": "Secondo ordine",
+      "address": "B2"
+    },
+    {
+      "sheet": "Secondo ordine",
+      "address": "B3"
+    }
+  ],
+  "decision_required": false,
+  "rejection_reason": "",
+  "warnings": []
+}

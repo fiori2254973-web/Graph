@@ -1,0 +1,28 @@
+{
+  "status": "solved",
+  "normalized_equation": "Derivative(y(x), x) = a*y(x)",
+  "solution": "Eq(y(x), exp(2*x))",
+  "verification": "(True, 0)",
+  "hints": [
+    "separable",
+    "1st_exact",
+    "1st_linear",
+    "Bernoulli",
+    "almost_linear",
+    "1st_power_series",
+    "lie_group",
+    "nth_linear_constant_coeff_homogeneous",
+    "separable_Integral",
+    "1st_exact_Integral",
+    "1st_linear_Integral",
+    "Bernoulli_Integral",
+    "almost_linear_Integral"
+  ],
+  "plot": null,
+  "llm_explanation": null,
+  "warnings": [
+    "Spiegazione Ollama non generata: TimeoutError: timed out"
+  ],
+  "stop_reason": null,
+  "error": null
+}
