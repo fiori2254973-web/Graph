@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="820" viewBox="0 0 1280 820" role="img" aria-labelledby="title desc">
+  <title id="title">Problemi principali e soluzioni applicate</title>
+  <desc id="desc">Matrice dei problemi tecnici incontrati e delle soluzioni applicate nella sessione.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+    <style>
+      .head { fill:#0f172a; }
+      .problem { fill:#fee2e2; stroke:#dc2626; stroke-width:2; rx:8; }
+      .fix { fill:#dcfce7; stroke:#16a34a; stroke-width:2; rx:8; }
+      .risk { fill:#fef3c7; stroke:#d97706; stroke-width:2; rx:8; }
+      .text { font-family:'Segoe UI', Arial, sans-serif; fill:#111827; }
+      .white { fill:#ffffff; }
+      .small { font-size:14px; fill:#374151; }
+      .title { font-size:17px; font-weight:700; }
+      .line { stroke:#334155; stroke-width:2; fill:none; marker-end:url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1280" height="820" fill="#f8fafc"/>
+  <text x="640" y="52" text-anchor="middle" class="text" font-size="30" font-weight="700">Problemi, fix e rischio residuo</text>
+  <text x="640" y="82" text-anchor="middle" class="text small">Hardening applicato durante la trasformazione del symposium in un MoA piu' reale.</text>
+
+  <rect x="70" y="120" width="300" height="44" class="head"/>
+  <text x="220" y="149" text-anchor="middle" class="white" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Problema</text>
+  <rect x="490" y="120" width="300" height="44" class="head"/>
+  <text x="640" y="149" text-anchor="middle" class="white" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Soluzione applicata</text>
+  <rect x="910" y="120" width="300" height="44" class="head"/>
+  <text x="1060" y="149" text-anchor="middle" class="white" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Rischio residuo</text>
+
+  <g transform="translate(70,195)">
+    <rect width="300" height="82" class="problem"/>
+    <text x="20" y="32" class="text title">Falsa concertazione</text>
+    <text x="20" y="58" class="text small">run avanzati con agenti mancanti</text>
+  </g>
+  <g transform="translate(490,195)">
+    <rect width="300" height="82" class="fix"/>
+    <text x="20" y="32" class="text title">Gate MoA bloccanti</text>
+    <text x="20" y="58" class="text small">moa-next/finalize controllano tutti</text>
+  </g>
+  <g transform="translate(910,195)">
+    <rect width="300" height="82" class="risk"/>
+    <text x="20" y="32" class="text title">Qualita' non garantita</text>
+    <text x="20" y="58" class="text small">serve audit semantico umano</text>
+  </g>
+
+  <g transform="translate(70,315)">
+    <rect width="300" height="82" class="problem"/>
+    <text x="20" y="32" class="text title">Agenti non istanziati</text>
+    <text x="20" y="58" class="text small">nomi registrati senza worker reali</text>
+  </g>
+  <g transform="translate(490,315)">
+    <rect width="300" height="82" class="fix"/>
+    <text x="20" y="32" class="text title">Adapter e launcher</text>
+    <text x="20" y="58" class="text small">Claude/Gemini via provider API</text>
+  </g>
+  <g transform="translate(910,315)">
+    <rect width="300" height="82" class="risk"/>
+    <text x="20" y="32" class="text title">Dipendenza API</text>
+    <text x="20" y="58" class="text small">billing, rete, modelli, rate limit</text>
+  </g>
+
+  <g transform="translate(70,435)">
+    <rect width="300" height="82" class="problem"/>
+    <text x="20" y="32" class="text title">Encoding e Unicode</text>
+    <text x="20" y="58" class="text small">caratteri corrotti o surrogati</text>
+  </g>
+  <g transform="translate(490,435)">
+    <rect width="300" height="82" class="fix"/>
+    <text x="20" y="32" class="text title">UTF-8 hardening</text>
+    <text x="20" y="58" class="text small">stdout/stderr e payload sanificati</text>
+  </g>
+  <g transform="translate(910,435)">
+    <rect width="300" height="82" class="risk"/>
+    <text x="20" y="32" class="text title">Output provider variabile</text>
+    <text x="20" y="58" class="text small">servono test con casi reali</text>
+  </g>
+
+  <g transform="translate(70,555)">
+    <rect width="300" height="82" class="problem"/>
+    <text x="20" y="32" class="text title">Diagrammi instabili</text>
+    <text x="20" y="58" class="text small">preview Mermaid intermittente</text>
+  </g>
+  <g transform="translate(490,555)">
+    <rect width="300" height="82" class="fix"/>
+    <text x="20" y="32" class="text title">SVG + sorgente Mermaid</text>
+    <text x="20" y="58" class="text small">rendering visibile e sorgente auditabile</text>
+  </g>
+  <g transform="translate(910,555)">
+    <rect width="300" height="82" class="risk"/>
+    <text x="20" y="32" class="text title">Drift documentale</text>
+    <text x="20" y="58" class="text small">rigenerare SVG dopo modifiche</text>
+  </g>
+
+  <g transform="translate(70,675)">
+    <rect width="300" height="82" class="problem"/>
+    <text x="20" y="32" class="text title">Backend SQLite limitante</text>
+    <text x="20" y="58" class="text small">stato locale fragile per MoA</text>
+  </g>
+  <g transform="translate(490,675)">
+    <rect width="300" height="82" class="fix"/>
+    <text x="20" y="32" class="text title">Redis Stack</text>
+    <text x="20" y="58" class="text small">bus persistente e containerizzato</text>
+  </g>
+  <g transform="translate(910,675)">
+    <rect width="300" height="82" class="risk"/>
+    <text x="20" y="32" class="text title">Migrazione storica</text>
+    <text x="20" y="58" class="text small">SQLite vecchio non importato</text>
+  </g>
+
+  <path class="line" d="M370 236 H490"/>
+  <path class="line" d="M790 236 H910"/>
+  <path class="line" d="M370 356 H490"/>
+  <path class="line" d="M790 356 H910"/>
+  <path class="line" d="M370 476 H490"/>
+  <path class="line" d="M790 476 H910"/>
+  <path class="line" d="M370 596 H490"/>
+  <path class="line" d="M790 596 H910"/>
+  <path class="line" d="M370 716 H490"/>
+  <path class="line" d="M790 716 H910"/>
+</svg>

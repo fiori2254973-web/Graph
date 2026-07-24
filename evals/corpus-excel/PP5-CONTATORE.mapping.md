@@ -65,6 +65,11 @@ Per Graph questo e' importante perche' il grafico "giusto" non e' soltanto una s
 
 ### Mappa mentale del dominio
 
+![Mappa mentale del dominio](assets/PP5-CONTATORE-dominio.svg)
+
+<details>
+<summary>Sorgente Mermaid</summary>
+
 ```mermaid
 mindmap
   root((PP5-CONTATORE.xlsx))
@@ -110,7 +115,14 @@ mindmap
         Scelta utente
 ```
 
+</details>
+
 ### Mappa mentale delle relazioni di dominio
+
+![Mappa mentale delle relazioni di dominio](assets/PP5-CONTATORE-relazioni-dominio.svg)
+
+<details>
+<summary>Sorgente Mermaid</summary>
 
 ```mermaid
 mindmap
@@ -167,7 +179,14 @@ mindmap
         chi quadro
 ```
 
+</details>
+
 ### Mappa mentale dei grafici candidati
+
+![Mappa mentale dei grafici candidati](assets/PP5-CONTATORE-grafici-candidati.svg)
+
+<details>
+<summary>Sorgente Mermaid</summary>
 
 ```mermaid
 mindmap
@@ -204,6 +223,8 @@ mindmap
       Significato 0 e 0+1
       Significato K
 ```
+
+</details>
 
 ### Implicazioni del dominio per Graph
 

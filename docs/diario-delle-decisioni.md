@@ -40,3 +40,12 @@ Registrare decisioni importanti, motivazione, alternative scartate e impatto att
 - Collegamenti: `adr/ADR-002-elaborazione-client-side-iniziale.md`
 - Owner: progetto Graph
 
+### DEC-003 - Graph viene rifondato come software Python per Excel elastici e ODE
+
+- Data: 2026-07-24
+- Decisione: il progetto Graph assume come nuovo scopo la lettura di file Excel elastici contenenti dati per equazioni differenziali, con soluzione/verifica in Python tramite SymPy e spiegazione con Ollama `phi4-mini`.
+- Motivazione: l'obiettivo dichiarato dall'utente richiede elasticita' nel mapping celle, solver simbolico, verifica matematica e guardrail LLM; il vecchio perimetro HTML5/charting generico non e' piu' sufficiente.
+- Alternative scartate: mantenere il progetto come pagina HTML5; richiedere Excel a celle fisse; usare `phi4-mini` come solver primario; accettare parsing libero senza confidenza e stop condition.
+- Impatto atteso: nuova SDD, nuova ADR, nuovi task, riallineamento delle specifiche precedenti e implementazione Python-first.
+- Collegamenti: `specs/000-costituzione-del-progetto.md`, `specs/007-excel-equazioni-differenziali-python.md`, `adr/ADR-003-python-sympy-ollama-phi4-mini.md`, `tasks/TASK-004-rifondazione-graph-ode-excel.md`
+- Owner: progetto Graph

@@ -50,3 +50,32 @@ Rendere visibili le ipotesi non ancora verificate.
 - Stato: aperta
 - Collegamenti: `specs/006-correzione-manuale-preview.md`
 
+### ASM-004 - Il primo Graph ODE puo' essere Python CLI-first
+
+- Data: 2026-07-24
+- Assunzione: un primo prototipo locale da console e' sufficiente per validare parsing Excel, mapping, soluzione, verifica, grafico e spiegazione.
+- Fiducia: media
+- Prova mancante: test con corpus Excel realistico e feedback utente.
+- Metodo di verifica: implementare `TASK-004` e provare almeno sei casi `CASE-ODE-*`.
+- Stato: aperta
+- Collegamenti: `specs/007-excel-equazioni-differenziali-python.md`, `tasks/TASK-004-rifondazione-graph-ode-excel.md`
+
+### ASM-005 - Excel elastici sono gestibili con blocchi candidati e confidenza
+
+- Data: 2026-07-24
+- Assunzione: celle libere possono essere ricondotte a blocchi logici come equazione, parametri, condizioni iniziali, range grafico e note senza imporre celle fisse.
+- Fiducia: media-bassa
+- Prova mancante: corpus con layout diversi, celle sparse, duplicati e ambiguita'.
+- Metodo di verifica: costruire mapping JSON con celle sorgente e misurare quanti casi richiedono conferma utente.
+- Stato: aperta
+- Collegamenti: `specs/007-excel-equazioni-differenziali-python.md`
+
+### ASM-006 - phi4-mini e' utile come spiegatore se vincolato
+
+- Data: 2026-07-24
+- Assunzione: `phi4-mini` puo' produrre spiegazioni utili se il prompt limita il ruolo del modello e l'output viene filtrato contro contraddizioni SymPy.
+- Fiducia: media
+- Prova mancante: batteria di esempi con risposte corrette, lente, vuote e contraddittorie.
+- Metodo di verifica: testare le risposte LLM su casi `CASE-ODE-*` e aggiornare `AI-LEDGER.md` a ogni recidiva.
+- Stato: aperta
+- Collegamenti: `AI-LEDGER.md`, `scripts/ode_phi4_mini_solver.py`, `scripts/ode_phi4_solver.py`

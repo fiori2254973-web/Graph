@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="title desc">
+  <title id="title">Flusso MoA del symposium</title>
+  <desc id="desc">Diagramma del flusso: richiesta, Redis, adapter, layer, gate e documento finale.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#374151"/>
+    </marker>
+    <style>
+      .box { fill:#ffffff; stroke:#64748b; stroke-width:2; rx:10; }
+      .accent { fill:#ecfeff; stroke:#0891b2; stroke-width:2; rx:10; }
+      .gate { fill:#fef3c7; stroke:#d97706; stroke-width:2; rx:10; }
+      .final { fill:#dcfce7; stroke:#16a34a; stroke-width:2; rx:10; }
+      .risk { fill:#fee2e2; stroke:#dc2626; stroke-width:2; rx:10; }
+      .text { font-family:'Segoe UI', Arial, sans-serif; fill:#111827; }
+      .small { font-size:14px; fill:#374151; }
+      .title { font-size:18px; font-weight:700; }
+      .line { stroke:#374151; stroke-width:2; fill:none; marker-end:url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1280" height="760" fill="#f8fafc"/>
+  <text x="640" y="54" text-anchor="middle" class="text" font-size="30" font-weight="700">Dal bus locale al MoA concertato</text>
+  <text x="640" y="84" text-anchor="middle" class="text small">Ogni passaggio lascia traccia in Redis e viene controllato dai gate prima di avanzare.</text>
+
+  <rect x="70" y="135" width="190" height="90" class="box"/>
+  <text x="165" y="170" text-anchor="middle" class="text title">Richiesta utente</text>
+  <text x="165" y="198" text-anchor="middle" class="text small">tema e vincoli</text>
+
+  <rect x="330" y="135" width="190" height="90" class="accent"/>
+  <text x="425" y="170" text-anchor="middle" class="text title">Codex</text>
+  <text x="425" y="198" text-anchor="middle" class="text small">verifica repo e inbox</text>
+
+  <rect x="590" y="135" width="190" height="90" class="accent"/>
+  <text x="685" y="170" text-anchor="middle" class="text title">moa-start</text>
+  <text x="685" y="198" text-anchor="middle" class="text small">crea run e thread</text>
+
+  <rect x="850" y="135" width="190" height="90" class="box"/>
+  <text x="945" y="170" text-anchor="middle" class="text title">Adapter</text>
+  <text x="945" y="198" text-anchor="middle" class="text small">Claude e Gemini</text>
+
+  <rect x="590" y="300" width="190" height="90" class="box"/>
+  <text x="685" y="335" text-anchor="middle" class="text title">Redis</text>
+  <text x="685" y="363" text-anchor="middle" class="text small">bus, run, contributi</text>
+
+  <rect x="70" y="475" width="210" height="95" class="box"/>
+  <text x="175" y="508" text-anchor="middle" class="text title">Layer 1</text>
+  <text x="175" y="536" text-anchor="middle" class="text small">contributi indipendenti</text>
+
+  <rect x="350" y="475" width="210" height="95" class="gate"/>
+  <text x="455" y="508" text-anchor="middle" class="text title">Gate</text>
+  <text x="455" y="536" text-anchor="middle" class="text small">tutti presenti?</text>
+
+  <rect x="630" y="475" width="210" height="95" class="box"/>
+  <text x="735" y="508" text-anchor="middle" class="text title">Layer 2</text>
+  <text x="735" y="536" text-anchor="middle" class="text small">critica e sintesi</text>
+
+  <rect x="910" y="475" width="210" height="95" class="gate"/>
+  <text x="1015" y="508" text-anchor="middle" class="text title">Gate finale</text>
+  <text x="1015" y="536" text-anchor="middle" class="text small">nessun mancante</text>
+
+  <rect x="500" y="635" width="280" height="70" class="final"/>
+  <text x="640" y="666" text-anchor="middle" class="text title">Dispensa Markdown</text>
+  <text x="640" y="692" text-anchor="middle" class="text small">SVG statici + Mermaid sorgente</text>
+
+  <path class="line" d="M260 180 H330"/>
+  <path class="line" d="M520 180 H590"/>
+  <path class="line" d="M780 180 H850"/>
+  <path class="line" d="M945 225 C945 285 780 285 760 320"/>
+  <path class="line" d="M685 225 V300"/>
+  <path class="line" d="M590 345 C430 365 245 415 175 475"/>
+  <path class="line" d="M280 522 H350"/>
+  <path class="line" d="M560 522 H630"/>
+  <path class="line" d="M840 522 H910"/>
+  <path class="line" d="M1015 570 C980 635 810 670 780 670"/>
+  <path class="line" d="M500 670 C420 640 455 585 455 570"/>
+  <path class="line" d="M685 390 C685 420 735 440 735 475"/>
+
+  <rect x="995" y="286" width="210" height="82" class="risk"/>
+  <text x="1100" y="318" text-anchor="middle" class="text title">Black hat</text>
+  <text x="1100" y="344" text-anchor="middle" class="text small">gate tecnico</text>
+  <text x="1100" y="364" text-anchor="middle" class="text small">non e' qualita'</text>
+  <path class="line" d="M995 330 H780"/>
+</svg>

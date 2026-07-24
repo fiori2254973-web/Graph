@@ -2,80 +2,96 @@
 
 ## Descrizione del progetto
 
-Graph e' un'applicazione web HTML5 per trasformare fogli Excel generici in grafici interattivi. L'utente carica un file `.xlsx` o `.xls`, il sistema individua una struttura tabellare plausibile, propone una configurazione visuale e permette di correggerla prima del rendering.
+Graph e' un software Python per trasformare file Excel elastici in problemi di equazioni differenziali risolvibili, verificabili, graficabili e spiegabili.
 
-Il progetto sara' sviluppato con SDD, Spec Driven Development. Ogni funzionalita' rilevante dovra' nascere da una specifica verificabile: cosa accetta il sistema, come interpreta i dati, quali decisioni automatiche prende, quando chiede conferma all'utente e come segnala un caso non gestibile.
+L'utente fornisce un file `.xlsx` o `.xls` in cui equazioni, parametri, condizioni iniziali, intervalli di grafico e note possono trovarsi in un numero non predeterminato di celle. Graph deve leggere il workbook, costruire una mappa del foglio, proporre interpretazioni candidate con confidenza e celle sorgente, chiedere conferma quando serve, risolvere con SymPy, verificare con `checkodesol`, generare un grafico quando possibile e usare `phi4-mini` tramite Ollama solo per spiegazione o supporto di mapping.
 
-## Analisi del progetto
+Il principio operativo e':
 
-### Fatti
+> Massima elasticita' in ingresso, massima rigidita' in uscita.
 
-- Input: file Excel caricati localmente dall'utente.
-- Output: grafici renderizzati in una pagina web.
-- Ambiente iniziale: browser moderno, HTML5, elaborazione client-side.
-- Dati attesi: intestazioni, categorie, numeri, date, serie singole o multiple.
-- Primo vincolo: nessun formato Excel obbligatorio, ma ogni inferenza deve essere spiegabile.
+## Stato SDD
 
-### Rischi e criticita'
+La costituzione aggiornata e' in `specs/000-costituzione-del-progetto.md`.
 
-- Tabelle non rettangolari, righe introduttive, celle vuote e intestazioni spezzate.
-- Piu' tabelle nello stesso foglio.
-- Valori misti nella stessa colonna, inclusi numeri formattati come testo.
-- Date, valute e separatori dipendenti dalla localizzazione.
-- File grandi o complessi che possono bloccare il browser.
-- Suggerimenti automatici apparentemente validi ma semanticamente errati.
+Le vecchie specifiche orientate a una pagina HTML5 per grafici tabellari generici restano nel repository come materiale storico finche' non vengono riallineate o archiviate. Da questa revisione in avanti, la fonte di verita' e' il dominio:
 
-Questi casi dovranno diventare scenari di specifica, non eccezioni scoperte a posteriori.
+```text
+Excel elastico -> mapping celle -> problema ODE -> SymPy -> verifica -> grafico -> spiegazione phi4-mini
+```
 
-### Opportunita'
+## Fatti
 
-Graph riduce il passaggio manuale da dato tabellare a visualizzazione. Il valore principale e' dare a utenti non tecnici uno strumento rapido per esplorare file Excel senza preparazione preventiva, mantenendo comunque trasparenza sulle assunzioni fatte dal sistema.
+- Input: file Excel `.xlsx` o `.xls`.
+- Ambiente target: Python locale.
+- Solver iniziale: SymPy.
+- Grafico iniziale: matplotlib e numpy.
+- LLM locale: Ollama con modello `phi4-mini`.
+- Coordinamento SDD opzionale: `symposium.py` con backend Redis.
+- Prototipi esistenti:
+  - `scripts/ode_phi4_solver.py`, con symposium/Redis;
+  - `scripts/ode_phi4_mini_solver.py`, standalone senza symposium/Redis.
 
-La SDD aggiunge valore tecnico: rende il progetto incrementale, testabile e meno dipendente da decisioni implicite nel codice.
+## Perimetri iniziali
 
-### Percezione ed emozioni
+| Area | Dentro | Fuori nella prima fase |
+| --- | --- | --- |
+| Excel | celle libere, fogli multipli, blocchi candidati | PDF, immagini, database |
+| Oggetti | equazione, parametri, condizioni iniziali, range grafico, note | semantica fisica completa |
+| Equazioni | ODE primo e secondo ordine | PDE, sistemi ODE, equazioni stocastiche |
+| Solver | SymPy + verifica | soluzione affidata al solo LLM |
+| LLM | spiegazione, mapping candidato, diagnostica | autorita' matematica primaria |
+| Output | mapping, soluzione, verifica, grafico, warning | risultato non tracciabile |
 
-L'utente deve percepire controllo, non magia opaca. Il sistema puo' proporre una lettura del foglio, ma deve rendere facile capire cosa ha riconosciuto e modificare assi, serie, etichette o tipo di grafico.
+## Pipeline
 
-La qualita' dell'esperienza dipendera' soprattutto dalla gestione dell'incertezza: un foglio ambiguo non dovra' produrre un risultato silenziosamente sbagliato, ma una scelta guidata.
+```mermaid
+flowchart LR
+    A[Excel] --> B[Mappa celle]
+    B --> C[Blocchi candidati]
+    C --> D[Interpretazioni ODE]
+    D --> E{Conferma necessaria?}
+    E -- si --> F[Preview utente]
+    E -- no --> G[Normalizzazione]
+    F --> G
+    G --> H[SymPy dsolve]
+    H --> I[checkodesol]
+    I --> J{Verifica positiva?}
+    J -- no --> K[Stop diagnostico]
+    J -- si --> L[Grafico]
+    L --> M[Spiegazione phi4-mini]
+    M --> N[Report tracciabile]
+```
 
-### Alternative e lenti multiprospettiche
+## Regole non negoziabili
 
-Possibili capacita' evolutive:
+- Nessun risultato senza celle sorgente.
+- Nessuna scelta automatica senza confidenza e motivazione.
+- Nessun calcolo definitivo se esistono interpretazioni incompatibili non risolte.
+- Nessun grafico se restano simboli liberi necessari.
+- Nessuna spiegazione LLM puo' prevalere su una verifica SymPy positiva.
+- Ogni euristica nuova deve entrare in specifica, test o `AI-LEDGER.md`.
 
-- riconoscimento di una tabella principale e, in seguito, di piu' tabelle;
-- anteprima normalizzata dei dati estratti;
-- suggerimento del grafico in base a cardinalita', tipi di dato e numero di serie;
-- configurazione manuale di assi, serie, filtri e titolo;
-- esportazione del grafico come immagine o della configurazione come JSON;
-- raccolta di file Excel di esempio come corpus di specifica.
+## Documenti principali
 
-### Decisioni e regia
+- `specs/000-costituzione-del-progetto.md`: costituzione aggiornata.
+- `specs/007-excel-equazioni-differenziali-python.md`: specifica operativa del nuovo Graph.
+- `adr/ADR-003-python-sympy-ollama-phi4-mini.md`: decisione architetturale.
+- `tasks/TASK-004-rifondazione-graph-ode-excel.md`: task di riallineamento iniziale.
+- `AI-LEDGER.md`: regole anti-recidiva obbligatorie.
 
-Il lavoro sara' organizzato in specifiche piccole, versionate e verificabili.
+## Uso dei prototipi
 
-Sequenza iniziale:
+Standalone senza symposium:
 
-1. Definire gli scenari utente minimi.
-2. Specificare il caricamento dei file Excel e i messaggi di errore.
-3. Specificare le regole di individuazione della tabella.
-4. Specificare la normalizzazione dei valori.
-5. Specificare la selezione o proposta del grafico.
-6. Specificare l'interazione di correzione manuale.
-7. Implementare solo il comportamento coperto da criteri di accettazione.
-8. Validare con file campione: semplice, incompleto, ambiguo, grande.
+```powershell
+python .\scripts\ode_phi4_mini_solver.py --equation "y' = a*y" --params "a=2" --ics "y(0)=1" --plot
+```
 
-## Primo obiettivo
+Versione con symposium:
 
-Realizzare un prototipo end-to-end che:
+```powershell
+python .\scripts\ode_phi4_solver.py --equation "y' = a*y" --params "a=2" --ics "y(0)=1" --plot
+```
 
-1. carica un file Excel nel browser;
-2. mostra una preview dei dati interpretati;
-3. propone una configurazione grafica iniziale;
-4. permette una correzione manuale minima;
-5. renderizza il grafico;
-6. documenta il comportamento in specifiche controllabili.
-
-## Principio guida
-
-Graph non deve indovinare a ogni costo. Deve trasformare dati tabellari in grafici quando ha elementi sufficienti e, quando non li ha, deve rendere esplicita l'ambiguita' all'utente.
+I prototipi sono prove tecniche, non ancora il prodotto Excel completo.
